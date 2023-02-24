@@ -1,11 +1,12 @@
 import "./App.css";
+import Header from "./Header"
+import Footer from "./Footer"
 
 function App() {
   return (
-    <body class="page">
-      <header class="header">
-        <div class="header__logo"></div>
-      </header>
+    // <body class="page">
+    <>
+      <Header />
 
       <main class="content">
         <section class="profile">
@@ -32,9 +33,7 @@ function App() {
         </section>
       </main>
 
-      <footer class="footer">
-        <p class="footer__copyright">&copy; 2023 Михаил Сулим</p>
-      </footer>
+      <Footer />
 
       {/* <!-- popups--> */}
       {/* <!-- новое описание профиля --> */}
@@ -193,7 +192,8 @@ function App() {
           </div>
         </li>
       </template>
-    </body>
+      </>
+    // </body>
   );
 }
 
