@@ -1,8 +1,8 @@
 function Footer() {
   return (
     <>
-      <footer class="footer">
-        <p class="footer__copyright">&copy; 2023 Михаил Сулим</p>
+      <footer className="footer">
+        <p className="footer__copyright">&copy; 2023 Михаил Сулим</p>
       </footer>
     </>
   );
