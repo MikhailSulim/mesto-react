@@ -6,6 +6,7 @@ import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 
 function App() {
+  // переменные состояния, отвечающие за видимость попапов
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -52,8 +53,8 @@ function App() {
               id="input-name"
               type="text"
               className="popup__input popup__input_field_name"
-              minlength="2"
-              maxlength="40"
+              minLength="2"
+              maxLength="40"
               placeholder="Имя"
               name="name"
               required
@@ -63,8 +64,8 @@ function App() {
               id="input-subtitle"
               type="text"
               className="popup__input popup__input_field_subtitle"
-              minlength="2"
-              maxlength="200"
+              minLength="2"
+              maxLength="200"
               placeholder="О себе"
               name="about"
               required
@@ -74,7 +75,7 @@ function App() {
               className="popup__input-error"
             ></span>
             <button
-              className="popup__save popup__save_type_description"
+              className="popup__save popup__save_type_description popup__save_type_disabled"
               type="submit"
             >
               Сохранить
@@ -95,8 +96,8 @@ function App() {
               id="input-place"
               className="popup__input popup__input_field_place"
               placeholder="Название"
-              minlength="2"
-              maxlength="30"
+              minLength="2"
+              maxLength="30"
               name="name"
               required
             />

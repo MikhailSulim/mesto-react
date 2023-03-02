@@ -1,6 +1,24 @@
-function Main(props) {
+import React from "react";
+import api from "../utils/Api.js";
 
-  // TODO решить вопрос с размещением класса body 
+function Main(props) {
+  const [userName, setUserName] = React.useState();
+  const [userDescription, setUserDescription] = React.useState();
+  const [userAvatar, setUserAvatar] = React.useState();
+
+  React.useEffect(() => {
+    api
+      .getAllData()
+      .then((res) => {
+        const [initialCards, userData] = res;
+        setUserAvatar(userData.avatar);
+        setUserDescription(userData.about);
+        setUserName(userData.name);
+      })
+      .catch((err) => console.error(err));
+  });
+
+  // TODO решить вопрос с размещением класса body
 
   return (
     <>
@@ -9,7 +27,7 @@ function Main(props) {
           <div className="profile__container">
             <div className="profile__avatar">
               <img
-                src="#"
+                src={userAvatar}
                 alt="Аватар пользователя"
                 className="profile__avatar-img"
               />
@@ -20,12 +38,20 @@ function Main(props) {
               ></button>
             </div>
             <div className="profile__info">
-              <h1 className="profile__name">{}</h1>
-              <button className="profile__edit-button" type="button" onClick={props.onEditProfile}></button>
-              <p className="profile__subtitle"></p>
+              <h1 className="profile__name">{userName}</h1>
+              <button
+                className="profile__edit-button"
+                type="button"
+                onClick={props.onEditProfile}
+              ></button>
+              <p className="profile__subtitle">{userDescription}</p>
             </div>
           </div>
-          <button className="add-button" type="button" onClick={props.onAddPlace}></button>
+          <button
+            className="add-button"
+            type="button"
+            onClick={props.onAddPlace}
+          ></button>
         </section>
 
         <section className="elements">
