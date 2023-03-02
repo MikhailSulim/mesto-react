@@ -11,6 +11,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
+  // функции открытия/закрытия попапов
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   }
@@ -166,21 +167,6 @@ function App() {
           </>
         }
       />
-
-      {/* <!-- templates --> */}
-      <template id="card-template">
-        <li className="element">
-          <img src="#" alt="" className="element__img" />
-          <button className="element__delete" type="button"></button>
-          <div className="element__line-container">
-            <h2 className="element__title">{}</h2>
-            <div className="element__like-container">
-              <button className="element__like" type="button"></button>
-              <span className="element__like-count"></span>
-            </div>
-          </div>
-        </li>
-      </template>
     </>
     // </body>
   );

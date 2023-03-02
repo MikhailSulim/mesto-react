@@ -1,10 +1,12 @@
 import React from "react";
 import api from "../utils/Api.js";
+import Card from "./Card.js";
 
 function Main(props) {
-  const [userName, setUserName] = React.useState();
-  const [userDescription, setUserDescription] = React.useState();
-  const [userAvatar, setUserAvatar] = React.useState();
+  const [userName, setUserName] = React.useState("");
+  const [userDescription, setUserDescription] = React.useState("");
+  const [userAvatar, setUserAvatar] = React.useState("");
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
@@ -14,9 +16,19 @@ function Main(props) {
         setUserAvatar(userData.avatar);
         setUserDescription(userData.about);
         setUserName(userData.name);
+        setCards(
+          initialCards.map((card) => ({
+            id: card._id,
+            src: card.link,
+            description: `На фото - ${card.name}`,
+            title: card.name,
+            likes: card.likes.length,
+          }))
+        );
+        console.log(initialCards);
       })
       .catch((err) => console.error(err));
-  });
+  }, []);
 
   // TODO решить вопрос с размещением класса body
 
@@ -55,7 +67,11 @@ function Main(props) {
         </section>
 
         <section className="elements">
-          <ul className="elements__container"></ul>
+          <ul className="elements__container">
+            {cards.map(({ id, ...props }) => (
+              <Card key={id} {...props} />
+            ))}
+          </ul>
         </section>
       </main>
     </>
