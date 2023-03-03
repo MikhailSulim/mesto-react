@@ -4,12 +4,17 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 function App() {
   // переменные состояния, отвечающие за видимость попапов
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+
+  //
+
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   // функции открытия/закрытия попапов
   function handleEditAvatarClick() {
@@ -28,7 +33,12 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setSelectedCard({});
   }
+
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  } 
 
   return (
     // <body className="page">
@@ -39,6 +49,7 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
+        onCardClick={handleCardClick}
       />
 
       <Footer />
@@ -167,6 +178,10 @@ function App() {
           </>
         }
       />
+
+      <ImagePopup 
+      card={selectedCard}
+      onClose={closeAllPopups}/>
     </>
     // </body>
   );

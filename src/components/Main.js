@@ -6,6 +6,7 @@ function Main(props) {
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
+
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -18,14 +19,15 @@ function Main(props) {
         setUserName(userData.name);
         setCards(
           initialCards.map((card) => ({
-            id: card._id,
-            src: card.link,
-            description: `На фото - ${card.name}`,
-            title: card.name,
-            likes: card.likes.length,
+            // id: card._id,
+            // src: card.link,
+            // description: `На фото - ${card.name}`,
+            // title: card.name,
+            // likes: card.likes.length,
+            onCardClick: props.onCardClick,
+            card: card,
           }))
         );
-        console.log(initialCards);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -68,9 +70,9 @@ function Main(props) {
 
         <section className="elements">
           <ul className="elements__container">
-            {cards.map(({ id, ...props }) => (
+            {cards.map(({ id, ...props }) =>
               <Card key={id} {...props} />
-            ))}
+            )}
           </ul>
         </section>
       </main>

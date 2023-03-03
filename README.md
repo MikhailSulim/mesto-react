@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Проектная работа: "Mesto". Создана в рамках учёбы в [Яндекс.Практикум](https://practicum.yandex.ru) на факультете ["Веб-разработчик"](https://practicum.yandex.ru/web/). Спринт 10.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Описание:
+Данный проект является версией проекта "Mesto", [выполненного в ходе 4 — 9 спринтов](https://github.com/MikhailSulim/mesto), выполненного с помощью JavaScript библиотеки React.
 
-## Available Scripts
+"Место" — сайт о различных туристических местах и достопримечательностях в России и не только. Проектная работа была выполнена на основе макета в Figma с использованием расширенных возможностей HTML и CSS, в том числе с применением адаптивной вёрстки посредством Flexbox, Grid Layout и Media queries.
 
-In the project directory, you can run:
+[Внешний вид сайта Mesto](/readme_img.png)
 
-### `npm start`
+С помощью скриптов, написанных на JavaScript, реализовано:
+- наполнение страницы контентом;
+- возможность редактирования профиля;
+- возможность смены аватара в профиле пользователя;
+- возможность ставить и удалять лайки под выбранными фотографиями;
+- возможность добавлять и удалять карточки с фотографиями;
+- валидация корректности вводимых пользователем данных в полях редактирования профиля и добавления карточки;
+- возможность закрытия модальных окон нажатием кнопки Esc или кликом вне данного модального окна.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Скрипты написаны с использованием ООП. Функционалы добавления новой карточки и валидации на формах добавления новой карточки и редактирования профиля реализованы через соответствующие классы и их методы.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[Проектная работа на GitHub Pages](https://mikhailsulim.github.io/mesto-react/index.html)
 
-### `npm test`
+## Функционал:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Адаптивный дизайн
+- Трансформация элементов страницы средствами CSS
+- Добавление контента на страницу через JS
+- Интерактивная форма для редактирования профиля
+- Интерактивная форма для добавления новой карточки с фото
+- Возможность ставить и удалять лайки выбранным карточкам
+- Возможность удалять карточки
+- Валидация вводимых пользователем данных в полях форм редактирования профиля и добавления новой карточки
 
-### `npm run build`
+## Технологии:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Flexbox
+- Grid Layout
+- БЭМ
+- Файловая структура по методологии БЭМ (Nested BEM)
+- Git
+- GitHub Pages
+- JavaScript
+- JS-свойство ValidityState
+- ООП
+- Webpack
+- npm
+- API
+- React.js
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Этапы создания проектной работы:
+### Спринт 10
+Созданы компоненты Card, App, Header, Main, Footer, компоненты модальных окон.
+Функционал проекта ограничен формированием DOM-дерева и наполнением страницы контентом и информацией о пользователе. Модальные окна окрываются при нажатии соответствующих кнопок и закрываются при нажатии кнопки закрытия.  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Работа с проектом:
+### Клонировать репозиторий:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+git clone https://github.com/MikhailSulim/mesto-react.git
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Собрать проект:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+npm run build
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Задеплоить проект на GitHub Pages:
 
-## Learn More
+npm run deploy
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Будущая доработка проекта будет включать в себя:
 
-### Code Splitting
+- Дальнейший рефакторинг кода
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Ссылка на чеклист:
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Чеклист проектной работы. Спринт 10.](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-10.pdf)
