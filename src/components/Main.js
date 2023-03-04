@@ -19,11 +19,6 @@ function Main(props) {
         setUserName(userData.name);
         setCards(
           initialCards.map((card) => ({
-            // id: card._id,
-            // src: card.link,
-            // description: `На фото - ${card.name}`,
-            // title: card.name,
-            // likes: card.likes.length,
             onCardClick: props.onCardClick,
             card: card,
           }))
@@ -32,51 +27,47 @@ function Main(props) {
       .catch((err) => console.error(err));
   }, []);
 
-  // TODO решить вопрос с размещением класса body
-
   return (
-    <>
-      <main className="content">
-        <section className="profile">
-          <div className="profile__container">
-            <div className="profile__avatar">
-              <img
-                src={userAvatar}
-                alt="Аватар пользователя"
-                className="profile__avatar-img"
-              />
-              <button
-                type="button"
-                className="profile__avatar-btn"
-                onClick={props.onEditAvatar}
-              ></button>
-            </div>
-            <div className="profile__info">
-              <h1 className="profile__name">{userName}</h1>
-              <button
-                className="profile__edit-button"
-                type="button"
-                onClick={props.onEditProfile}
-              ></button>
-              <p className="profile__subtitle">{userDescription}</p>
-            </div>
+    <main className="content">
+      <section className="profile">
+        <div className="profile__container">
+          <div className="profile__avatar">
+            <img
+              src={userAvatar}
+              alt="Аватар пользователя"
+              className="profile__avatar-img"
+            />
+            <button
+              type="button"
+              className="profile__avatar-btn"
+              onClick={props.onEditAvatar}
+            ></button>
           </div>
-          <button
-            className="add-button"
-            type="button"
-            onClick={props.onAddPlace}
-          ></button>
-        </section>
+          <div className="profile__info">
+            <h1 className="profile__name">{userName}</h1>
+            <button
+              className="profile__edit-button"
+              type="button"
+              onClick={props.onEditProfile}
+            ></button>
+            <p className="profile__subtitle">{userDescription}</p>
+          </div>
+        </div>
+        <button
+          className="add-button"
+          type="button"
+          onClick={props.onAddPlace}
+        ></button>
+      </section>
 
-        <section className="elements">
-          <ul className="elements__container">
-            {cards.map(({ id, ...props }) =>
-              <Card key={id} {...props} />
-            )}
-          </ul>
-        </section>
-      </main>
-    </>
+      <section className="elements">
+        <ul className="elements__container">
+          {cards.map((props) => (
+            <Card key={props.card._id} {...props} />
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 }
 
