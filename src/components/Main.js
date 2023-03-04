@@ -19,8 +19,8 @@ function Main(props) {
         setUserName(userData.name);
         setCards(
           initialCards.map((card) => ({
-            onCardClick: props.onCardClick,
             card: card,
+            onCardClick: props.onCardClick,
           }))
         );
       })
