@@ -6,7 +6,7 @@ function ImagePopup({card, onClose}) {
           className="popup__close popup__close_type_image"
           type="button"
           onClick={onClose}
-        ></button>
+        />
         <figure className="popup__image-figure">
           <img src={card.link} alt={`На фото - ${card.name}`} className="popup__image" />
           <figcaption className="popup__image-caption">{card.name}</figcaption>

@@ -11,22 +11,27 @@ class Api {
       : Promise.reject(`${res.status} ${res.statusText}`);
   }
 
+  _request(url, options) {
+    // функция отправки запроса с проверкой ответа
+    return fetch(url, options).then(this._checkResponse);
+    // второй then нужен потому что res.json тоже асинхронный и его надо дождаться
+  }
+
   /* ----------- получение данных с сервера --------------- */
   getCards() {
     // функция получения массива данных карточек с сервера
-    return fetch(`${this._serverUrl}/cards`, {
+    return this._request(`${this._serverUrl}/cards`, {
       method: "GET",
       headers: this._headers,
-    }).then(this._checkResponse); // получение с сервера
-    // второй then нужен потому что res.json тоже асинхронный и его надо дождаться
+    });
   }
 
   getUserInfo() {
     // функция получения данных о залогиненном пользователе с сервера
-    return fetch(`${this._serverUrl}/users/me`, {
+    return this._request(`${this._serverUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 
   getAllData() {
@@ -37,71 +42,70 @@ class Api {
   /* -------------- отправка данных на сервер --------------------*/
   createCard(place) {
     // функция отправки на сервер данных о новой карточке
-    return fetch(`${this._serverUrl}/cards`, {
+    return this._request(`${this._serverUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: place.name,
         link: place.link,
       }),
-    }).then(this._checkResponse);
+    });
   }
 
   setUserInfo(userData) {
     // функция замены данных о пользователе на сервере
-    return fetch(`${this._serverUrl}/users/me`, {
+    return this._request(`${this._serverUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: userData.name,
         about: userData.about,
       }),
-    }).then(this._checkResponse);
+    });
   }
 
   setUserAvatar(newAvatar) {
     // функция замены данных об аватаре пользователя
-    return fetch(`${this._serverUrl}/users/me/avatar`, {
+    return this._request(`${this._serverUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: newAvatar.avatar,
       }),
-    }).then(this._checkResponse);
+    });
   }
 
   /* -------------- функционал лайков ----------------*/
   addLike(cardId) {
     // функция отправки на сервер данных о том, что пользователь лайкнул карточку
-    return fetch(`${this._serverUrl}/cards/${cardId}/likes`, {
+    return this._request(`${this._serverUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 
   removeLike(cardId) {
     // функция отправки на сервер данных о том, что пользователь отменил свой лайк
-    return fetch(`${this._serverUrl}/cards/${cardId}/likes`, {
+    return this._request(`${this._serverUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 
   /* -------------- удаление данных на сервере -------------*/
   deleteCard(cardId) {
     // функция удаления данных выбранной карточки с сервера
-    return fetch(`${this._serverUrl}/cards/${cardId}`, {
+    return this._request(`${this._serverUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._checkResponse);
+    });
   }
 }
 
-
 const api = new Api({
-  serverUrl: 'https://mesto.nomoreparties.co/v1/cohort-59', // класс API
+  serverUrl: "https://mesto.nomoreparties.co/v1/cohort-59", // класс API
   headers: {
-    authorization: '015f9389-f767-4004-b14e-b18f050be44c',
+    authorization: "015f9389-f767-4004-b14e-b18f050be44c",
     "Content-Type": "application/json",
   },
 });

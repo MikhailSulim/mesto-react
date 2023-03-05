@@ -41,7 +41,7 @@ function Main(props) {
               type="button"
               className="profile__avatar-btn"
               onClick={props.onEditAvatar}
-            ></button>
+            />
           </div>
           <div className="profile__info">
             <h1 className="profile__name">{userName}</h1>
@@ -49,7 +49,7 @@ function Main(props) {
               className="profile__edit-button"
               type="button"
               onClick={props.onEditProfile}
-            ></button>
+            />
             <p className="profile__subtitle">{userDescription}</p>
           </div>
         </div>
@@ -57,7 +57,7 @@ function Main(props) {
           className="add-button"
           type="button"
           onClick={props.onAddPlace}
-        ></button>
+        />
       </section>
 
       <section className="elements">
