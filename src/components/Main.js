@@ -4,7 +4,7 @@ import Card from "./Card.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick}) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick, onCardLike, onCardDelete}) {
 
   const currentUser = useContext(CurrentUserContext);
   const {name, about, avatar} = currentUser;
@@ -52,6 +52,8 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, cards, onCardClick}) {
             key={card._id} 
             card={card}
             onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
              />
           ))}
         </ul>
