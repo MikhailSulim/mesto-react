@@ -63,6 +63,13 @@ function App() {
      api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
   });
+  }
+
+  function handleCardDelete(cardId) {
+    // const isOwn = card.owner._id === currentUser._id;
+    api.deleteCard(cardId).then(() => {
+      setCards((cards) => cards.filter((card) => card._id !== cardId));
+    });
 
   }
 
@@ -78,6 +85,7 @@ function App() {
           cards={cards}
           onCardClick={handleCardClick}
           onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
 
         <Footer />

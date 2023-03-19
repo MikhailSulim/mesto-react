@@ -24,7 +24,11 @@ function Card(props) {
     props.onCardLike(props.card);
   }
 
-  
+  function handleDeleteClick() {
+    props.onCardDelete(props.card._id);
+  }
+
+
 
   return (
     <li className="element">
@@ -39,7 +43,7 @@ function Card(props) {
         <button
           type="button"
           className="element__delete"
-          onClick={props.handleDeleteClick}
+          onClick={handleDeleteClick}
         />
       )}
       {/* <button className="element__delete" type="button" /> */}
