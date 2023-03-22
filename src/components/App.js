@@ -4,6 +4,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -80,6 +81,13 @@ function App() {
     });
   }
 
+  function handleUpdateAvatar(newAvatar) {
+    api.setUserAvatar(newAvatar).then((link) => {
+      setCurrentUser(link);
+      closeAllPopups();
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -101,6 +109,12 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+        />
+
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
         />
 
         <PopupWithForm // попап добавления карточки
@@ -130,27 +144,6 @@ function App() {
             required
           />
           <span id="input-link-error" className="popup__input-error"></span>
-        </PopupWithForm>
-
-        <PopupWithForm // попап смены аватара
-          name="new-avatar"
-          title="Обновить аватар"
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          buttonText="Сохранить"
-        >
-          <input
-            type="url"
-            id="input-link-avatar"
-            className="popup__input popup__input_field_link-avatar"
-            placeholder="Ссылка на аватар"
-            name="avatar"
-            required
-          />
-          <span
-            id="input-link-avatar-error"
-            className="popup__input-error"
-          ></span>
         </PopupWithForm>
 
         <PopupWithForm // попап подверждения удаленя карточки
