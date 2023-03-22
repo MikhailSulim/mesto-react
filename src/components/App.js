@@ -3,6 +3,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
+import EditProfilePopup from "./EditProfilePopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -57,12 +58,12 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-     // Отправляем запрос в API и получаем обновлённые данные карточки
-     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-  });
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
   }
 
   function handleCardDelete(cardId) {
@@ -70,7 +71,6 @@ function App() {
     api.deleteCard(cardId).then(() => {
       setCards((cards) => cards.filter((card) => card._id !== cardId));
     });
-
   }
 
   return (
@@ -90,36 +90,10 @@ function App() {
 
         <Footer />
 
-        <PopupWithForm // попап редактирования профиля пользователя
-          name="description"
-          title="Редактировать профиль"
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-          buttonText="Сохранить"
-        >
-          <input
-            id="input-name"
-            type="text"
-            className="popup__input popup__input_field_name"
-            minLength="2"
-            maxLength="40"
-            placeholder="Имя"
-            name="name"
-            required
-          />
-          <span id="input-name-error" className="popup__input-error"></span>
-          <input
-            id="input-subtitle"
-            type="text"
-            className="popup__input popup__input_field_subtitle"
-            minLength="2"
-            maxLength="200"
-            placeholder="О себе"
-            name="about"
-            required
-          />
-          <span id="input-subtitle-error" className="popup__input-error"></span>
-        </PopupWithForm>
+        />
 
         <PopupWithForm // попап добавления карточки
           name="add-card"
