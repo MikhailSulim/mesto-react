@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -88,6 +89,13 @@ function App() {
     });
   }
 
+  function handleAddPlaceSubmit(newPlace) {
+    api.createCard(newPlace).then((newCard) => {
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -117,34 +125,11 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
         />
 
-        <PopupWithForm // попап добавления карточки
-          name="add-card"
-          title="Новое место"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-          buttonText="Создать"
-        >
-          <input
-            type="text"
-            id="input-place"
-            className="popup__input popup__input_field_place"
-            placeholder="Название"
-            minLength="2"
-            maxLength="30"
-            name="name"
-            required
-          />
-          <span id="input-place-error" className="popup__input-error"></span>
-          <input
-            type="url"
-            id="input-link"
-            className="popup__input popup__input_field_link"
-            placeholder="Ссылка на картинку"
-            name="link"
-            required
-          />
-          <span id="input-link-error" className="popup__input-error"></span>
-        </PopupWithForm>
+          onAddPlace={handleAddPlaceSubmit}
+        />
 
         <PopupWithForm // попап подверждения удаленя карточки
           name="delete-photo"
