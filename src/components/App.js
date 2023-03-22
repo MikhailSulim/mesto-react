@@ -73,6 +73,13 @@ function App() {
     });
   }
 
+  function handleUpdateUser(newUserInfo) {
+    api.setUserInfo(newUserInfo).then((newUserData) => {
+      setCurrentUser(newUserData);
+      closeAllPopups();
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -93,6 +100,7 @@ function App() {
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
         />
 
         <PopupWithForm // попап добавления карточки

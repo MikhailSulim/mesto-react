@@ -2,17 +2,37 @@ import React, { useContext } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({ isOpen, onClose }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
-    const [name, setName] = React.useState("");
-    const [description, setDescription] = React.useState("");
+    const [name, setName] = React.useState("Mikko");
+    const [description, setDescription] = React.useState("Ohjelmoija");
 
+    // подписка на контекст
     const currentUser = useContext(CurrentUserContext);
 
     React.useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
     }, [currentUser]);
+
+    function handleSubmit(e) {
+        // Запрещаем браузеру переходить по адресу формы
+        e.preventDefault();
+      
+        // Передаём значения управляемых компонентов во внешний обработчик
+        onUpdateUser({
+          name: name,
+          about: description,
+        });
+      }
+
+      function handleChangeName(e) {
+        setName(e.target.value);
+      }
+
+      function handleChangeDescription(e) {
+        setDescription(e.target.value);
+      }
 
   return (
     <PopupWithForm // попап редактирования профиля пользователя
@@ -21,7 +41,7 @@ function EditProfilePopup({ isOpen, onClose }) {
       isOpen={isOpen}
       onClose={onClose}
       buttonText="Сохранить"
-      onSubmit
+      onSubmit={handleSubmit}
     >
       <input
         id="input-name"
@@ -33,7 +53,7 @@ function EditProfilePopup({ isOpen, onClose }) {
         name="name"
         required
         value={name}
-        // onChange={""}
+        onChange={handleChangeName}
       />
       <span id="input-name-error" className="popup__input-error"></span>
       <input
@@ -45,7 +65,7 @@ function EditProfilePopup({ isOpen, onClose }) {
         placeholder="О себе"
         name="about"
         value={description}
-        // onChange={""}
+        onChange={handleChangeDescription}
         required
       />
       <span id="input-subtitle-error" className="popup__input-error"></span>
