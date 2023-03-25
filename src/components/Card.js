@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Card({ card, onCardClick, onCardDelete, onCardLike }) {
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
   // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = card.owner._id === currentUser._id;
@@ -34,7 +34,6 @@ function Card({ card, onCardClick, onCardDelete, onCardLike }) {
         src={card.link}
         alt={`На фото - ${card.name}`}
         onClick={handleClick}
-        onCardLike
         className="element__img"
       />
       {isOwn && (

@@ -1,9 +1,10 @@
 import PopupWithForm from "./PopupWithForm";
 import React from "react";
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
   const [newCardTitle, setNewCardTitle] = React.useState("");
   const [newCardLink, setNewCardLink] = React.useState("");
+  const buttonText = isLoading ? "Сохранение..." : "Создать";
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -27,7 +28,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       title="Новое место"
       isOpen={isOpen}
       onClose={onClose}
-      buttonText="Создать"
+      buttonText={buttonText}
       onSubmit={handleSubmit}
     >
       <input

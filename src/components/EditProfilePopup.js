@@ -2,13 +2,14 @@ import React, { useContext } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
 
-    const [name, setName] = React.useState("Mikko");
-    const [description, setDescription] = React.useState("Ohjelmoija");
+    const [name, setName] = React.useState("");
+    const [description, setDescription] = React.useState("");
 
     // подписка на контекст
     const currentUser = useContext(CurrentUserContext);
+    const buttonText = isLoading ? "Сохранение..." : "Сохранить";
 
     React.useEffect(() => {
         setName(currentUser.name);
@@ -40,7 +41,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       title="Редактировать профиль"
       isOpen={isOpen}
       onClose={onClose}
-      buttonText="Сохранить"
+      buttonText={buttonText}
       onSubmit={handleSubmit}
     >
       <input
