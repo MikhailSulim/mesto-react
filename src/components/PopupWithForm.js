@@ -6,6 +6,7 @@ function PopupWithForm({
   children,
   buttonText,
   onSubmit,
+  isFormValid,
 }) {
   return (
     <div
@@ -21,8 +22,9 @@ function PopupWithForm({
         <form name={`${name}`} className="popup__content" onSubmit={onSubmit}>
           {children}
           <button
-            // className={`popup__save popup__save_type_${name} popup__save_type_disabled`}
-            className={`popup__save popup__save_type_${name}`}
+            className={`popup__save popup__save_type_${name} ${
+              !isFormValid ? "popup__save_type_disabled" : ""
+            }`}
             type="submit"
           >
             {buttonText}

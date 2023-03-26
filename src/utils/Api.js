@@ -76,22 +76,6 @@ class Api {
   }
 
   /* -------------- функционал лайков ----------------*/
-  // addLike(cardId) {
-  //   // функция отправки на сервер данных о том, что пользователь лайкнул карточку
-  //   return this._request(`${this._serverUrl}/cards/${cardId}/likes`, {
-  //     method: "PUT",
-  //     headers: this._headers,
-  //   });
-  // }
-
-  // removeLike(cardId) {
-  //   // функция отправки на сервер данных о том, что пользователь отменил свой лайк
-  //   return this._request(`${this._serverUrl}/cards/${cardId}/likes`, {
-  //     method: "DELETE",
-  //     headers: this._headers,
-  //   });
-  // }
-
   changeLikeCardStatus(cardId, isLiked) {
     return this._request(`${this._serverUrl}/cards/${cardId}/likes`, {
       method: `${!isLiked ? "DELETE" : "PUT"}`,

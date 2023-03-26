@@ -14,8 +14,6 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     isLiked && "element__like_is-liked"
   }`;
 
-  // Далее в разметке используем переменную для условного рендеринга
-
   function handleClick() {
     onCardClick(card);
   }

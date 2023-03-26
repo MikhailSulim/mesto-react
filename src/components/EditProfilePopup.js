@@ -1,39 +1,34 @@
 import React, { useContext } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import useFormValidate from "./../hooks/useFormValidate";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
+  const { values, errors, onChange, resetValidation, isFormValid } =
+    useFormValidate();
 
-    const [name, setName] = React.useState("");
-    const [description, setDescription] = React.useState("");
+  // подписка на контекст
+  const currentUser = useContext(CurrentUserContext);
 
-    // подписка на контекст
-    const currentUser = useContext(CurrentUserContext);
-    const buttonText = isLoading ? "Сохранение..." : "Сохранить";
+  React.useEffect(() => {
+    resetValidation(
+      { name: currentUser.name, about: currentUser.about },
+      {},
+      true
+    );
+  }, [currentUser, resetValidation]);
 
-    React.useEffect(() => {
-        setName(currentUser.name);
-        setDescription(currentUser.about);
-    }, [currentUser]);
+  function handleSubmit(e) {
+    // Запрещаем браузеру переходить по адресу формы
+    e.preventDefault();
 
-    function handleSubmit(e) {
-        // Запрещаем браузеру переходить по адресу формы
-        e.preventDefault();
-      
-        // Передаём значения управляемых компонентов во внешний обработчик
-        onUpdateUser({
-          name: name,
-          about: description,
-        });
-      }
-
-      function handleChangeName(e) {
-        setName(e.target.value);
-      }
-
-      function handleChangeDescription(e) {
-        setDescription(e.target.value);
-      }
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name: values.name,
+      about: values.about,
+    });
+    resetValidation();
+  }
 
   return (
     <PopupWithForm // попап редактирования профиля пользователя
@@ -41,8 +36,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
       title="Редактировать профиль"
       isOpen={isOpen}
       onClose={onClose}
-      buttonText={buttonText}
+      buttonText={isLoading ? "Сохранение..." : "Сохранить"}
       onSubmit={handleSubmit}
+      isFormValid={isFormValid}
     >
       <input
         id="input-name"
@@ -53,10 +49,12 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
         placeholder="Имя"
         name="name"
         required
-        value={name}
-        onChange={handleChangeName}
+        value={values.name || ""}
+        onChange={onChange}
       />
-      <span id="input-name-error" className="popup__input-error"></span>
+      <span id="input-name-error" className="popup__input-error">
+        {errors.name}
+      </span>
       <input
         id="input-subtitle"
         type="text"
@@ -65,11 +63,13 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
         maxLength="200"
         placeholder="О себе"
         name="about"
-        value={description}
-        onChange={handleChangeDescription}
+        value={values.about || ""}
+        onChange={onChange}
         required
       />
-      <span id="input-subtitle-error" className="popup__input-error"></span>
+      <span id="input-subtitle-error" className="popup__input-error">
+        {errors.about}
+      </span>
     </PopupWithForm>
   );
 }

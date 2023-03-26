@@ -1,8 +1,12 @@
 import PopupWithForm from "./PopupWithForm";
 
-function ConfirmDeleteCardPopup({ isOpen, onClose, onCardDelete, cardId, isLoading }) {
-  const buttonText = isLoading ? "Удаление..." : "Да";
-  
+function ConfirmDeleteCardPopup({
+  isOpen,
+  onClose,
+  onCardDelete,
+  cardId,
+  isLoading,
+}) {
   function handleSubmit(e) {
     e.preventDefault();
     onCardDelete(cardId);
@@ -15,7 +19,8 @@ function ConfirmDeleteCardPopup({ isOpen, onClose, onCardDelete, cardId, isLoadi
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonText={buttonText}
+      buttonText={isLoading ? "Удаление..." : "Да"}
+      isFormValid={true}
     />
   );
 }

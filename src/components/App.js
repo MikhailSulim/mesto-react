@@ -2,7 +2,6 @@ import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-// import PopupWithForm from "./PopupWithForm";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
@@ -10,10 +9,6 @@ import ConfirmDeleteCardPopup from "./ConfirmDeleteCardPopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-
-// TODO добавить очистку формы перед повторным открытием
-// TODO сделать кнопку сабмита активной/нет
-// TODO добавить валидацию
 
 function App() {
   // переменные состояния, отвечающие за видимость попапов
@@ -30,7 +25,7 @@ function App() {
   const [deletedCard, setDeletedCard] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
-  const [currentUser, setCurrentUser] = React.useState({ name: "", about: "" });
+  const [currentUser, setCurrentUser] = React.useState({});
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -51,7 +46,9 @@ function App() {
   }
 
   function handleEditProfileClick() {
+    // resetValidation();
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    // записать очищение
   }
 
   function handleAddPlaceClick() {
@@ -86,7 +83,6 @@ function App() {
   }
 
   function handleCardDelete(cardId) {
-    // const isOwn = card.owner._id === currentUser._id;
     setIsLoading(true);
     api
       .deleteCard(cardId)
@@ -96,7 +92,10 @@ function App() {
       })
       .catch((error) => console.error("error", error))
       .finally(() => {
-        setIsLoading(false);
+        setTimeout(() => {
+          // чтобы не было видно процесса обратной замены надписи
+          setIsLoading(false);
+        }, 500);
       });
   }
 
@@ -113,8 +112,12 @@ function App() {
         setCurrentUser(newUserData);
         closeAllPopups();
       })
-      .catch((error) => console.error("error", error)).finally(() => {
-        setIsLoading(false);
+      .catch((error) => console.error("error", error))
+      .finally(() => {
+        setTimeout(() => {
+          // чтобы не было видно процесса обратной замены надписи
+          setIsLoading(false);
+        }, 500);
       });
   }
 
@@ -126,8 +129,12 @@ function App() {
         setCurrentUser(link);
         closeAllPopups();
       })
-      .catch((error) => console.error("error", error)).finally(() => {
-        setIsLoading(false);
+      .catch((error) => console.error("error", error))
+      .finally(() => {
+        setTimeout(() => {
+          // чтобы не было видно процесса обратной замены надписи
+          setIsLoading(false);
+        }, 500);
       });
   }
 
@@ -141,7 +148,10 @@ function App() {
       })
       .catch((error) => console.error("error", error))
       .finally(() => {
-        setIsLoading(false);
+        setTimeout(() => {
+          // чтобы не было видно процесса обратной замены надписи
+          setIsLoading(false);
+        }, 500);
       });
   }
 

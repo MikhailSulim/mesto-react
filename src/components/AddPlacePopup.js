@@ -1,25 +1,22 @@
 import PopupWithForm from "./PopupWithForm";
-import React from "react";
+import React, { useEffect } from "react";
+import useFormValidate from "../hooks/useFormValidate";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
-  const [newCardTitle, setNewCardTitle] = React.useState("");
-  const [newCardLink, setNewCardLink] = React.useState("");
-  const buttonText = isLoading ? "Сохранение..." : "Создать";
+  const { values, errors, onChange, resetValidation, isFormValid } =
+    useFormValidate();
+
+  useEffect(() => {
+    resetValidation();
+  }, [isOpen, resetValidation]);
+
   function handleSubmit(e) {
     e.preventDefault();
 
     onAddPlace({
-      name: newCardTitle,
-      link: newCardLink,
+      name: values.name,
+      link: values.link,
     });
-  }
-
-  function handleChangeCardTitle(e) {
-    setNewCardTitle(e.target.value);
-  }
-
-  function handleChangeCardLink(e) {
-    setNewCardLink(e.target.value);
   }
 
   return (
@@ -28,8 +25,9 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
       title="Новое место"
       isOpen={isOpen}
       onClose={onClose}
-      buttonText={buttonText}
+      buttonText={isLoading ? "Сохранение..." : "Создать"}
       onSubmit={handleSubmit}
+      isFormValid={isFormValid}
     >
       <input
         type="text"
@@ -39,22 +37,26 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
         minLength="2"
         maxLength="30"
         name="name"
-        value={newCardTitle}
-        onChange={handleChangeCardTitle}
+        value={values.name || ""}
+        onChange={onChange}
         required
       />
-      <span id="input-place-error" className="popup__input-error"></span>
+      <span id="input-place-error" className="popup__input-error">
+        {errors.name}
+      </span>
       <input
         type="url"
         id="input-link"
         className="popup__input popup__input_field_link"
         placeholder="Ссылка на картинку"
         name="link"
-        value={newCardLink}
-        onChange={handleChangeCardLink}
+        value={values.link || ""}
+        onChange={onChange}
         required
       />
-      <span id="input-link-error" className="popup__input-error"></span>
+      <span id="input-link-error" className="popup__input-error">
+        {errors.link}
+      </span>
     </PopupWithForm>
   );
 }
